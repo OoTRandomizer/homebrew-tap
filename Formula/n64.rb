@@ -14,8 +14,8 @@ class N64 < Formula
   def install
     ENV.prepend_path "PATH", Formula["gnu-sed"].libexec/"gnubin"
     system "./configure", "--disable-silent-rules", *std_configure_args
-    system "gmake", "all-toolchain"
-    system "gmake", "-j", "install-toolchain"
+    system "gmake", "toolchain-all"
+    system "gmake", "-j", "toolchain-install"
     system "gmake", "-j", "install-sys"
   end
 
