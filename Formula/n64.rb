@@ -20,8 +20,8 @@ class N64 < Formula
     ENV["CC"] = gcc.opt_bin/"gcc-15"
     ENV["CXX"] = gcc.opt_bin/"g++-15"
     ENV["CPPFLAGS"] = "-DHAVE_LUA5_4_LUA_H -llua5.4\
-     -DHAVE_LIBUSB_1_0_LIBUSB_H\
-     -lusb-1.0 -I#{HOMEBREW_PREFIX}/include\
+     -DHAVE_LIBUSB_1_0_LIBUSB_H -lusb-1.0\
+      -I#{HOMEBREW_PREFIX}/include\
       -L#{HOMEBREW_PREFIX}/lib"
     ENV.prepend_path "PATH", Formula["gnu-sed"].libexec/"gnubin"
 
