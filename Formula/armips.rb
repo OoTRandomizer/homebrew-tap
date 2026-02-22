@@ -1,5 +1,6 @@
 class Armips < Formula
   desc "Assembler for various ARM and MIPS platforms"
+  homepage "https://github.com/Kingcom/armips"
   license "MIT"
   head "https://github.com/Kingcom/armips.git"
 
