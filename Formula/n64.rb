@@ -1,8 +1,8 @@
 class N64 < Formula
   desc "C toolchain for the Nintendo 64"
   homepage "https://github.com/glankk/n64"
-  if ENV["HOMEBREW_OOTR_N64_HEAD_URL"]
-    head ENV.fetch("HOMEBREW_OOTR_N64_HEAD_URL")
+  if ENV["HOMEBREW_N64_HEAD_URL"]
+    head ENV.fetch("HOMEBREW_N64_HEAD_URL")
   else
     head "https://github.com/glankk/n64.git"
   end
@@ -34,15 +34,15 @@ class N64 < Formula
 
     prepare_dependency_paths
 
-    source_root = if ENV["HOMEBREW_OOTR_N64_SOURCE_DIR"].to_s.empty?
+    source_root = if ENV["HOMEBREW_N64_SOURCE_DIR"].to_s.empty?
       find_n64_source_root(buildpath)
     else
-      stage_local_source(ENV.fetch("HOMEBREW_OOTR_N64_SOURCE_DIR"))
+      stage_local_source(ENV.fetch("HOMEBREW_N64_SOURCE_DIR"))
     end
 
     configure_args = ["--prefix=#{prefix}"]
-    gdb_override = ENV["HOMEBREW_OOTR_N64_BUILD_GDB"]
-    odie "HOMEBREW_OOTR_N64_BUILD_GDB must be 0 or 1" if gdb_override && !%w[0 1].include?(gdb_override)
+    gdb_override = ENV["HOMEBREW_N64_BUILD_GDB"]
+    odie "HOMEBREW_N64_BUILD_GDB must be 0 or 1" if gdb_override && !%w[0 1].include?(gdb_override)
     if gdb_override == "0" || (gdb_override.nil? && OS.mac? && Hardware::CPU.arm?)
       configure_args << "--disable-toolchain-gdb"
     elsif gdb_override == "1"
@@ -53,8 +53,8 @@ class N64 < Formula
       system "./configure", *configure_args
 
       if OS.mac? && Hardware::CPU.arm?
-        jobs = ENV.fetch("HOMEBREW_OOTR_N64_JOBS", "1")
-        odie "HOMEBREW_OOTR_N64_JOBS must be a positive integer" unless jobs.match?(/\A[1-9][0-9]*\z/)
+        jobs = ENV.fetch("HOMEBREW_N64_JOBS", "1")
+        odie "HOMEBREW_N64_JOBS must be a positive integer" unless jobs.match?(/\A[1-9][0-9]*\z/)
         ENV.deparallelize
         make_args = ["-j#{jobs}"]
         system "gmake", *make_args, "toolchain-all"

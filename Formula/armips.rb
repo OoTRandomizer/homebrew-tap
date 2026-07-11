@@ -2,15 +2,15 @@ class Armips < Formula
   desc "Assembler for various ARM and MIPS platforms"
   homepage "https://github.com/Kingcom/armips"
   license "MIT"
-  head ENV.fetch("HOMEBREW_OOTR_ARMIPS_HEAD_URL", "https://github.com/Kingcom/armips.git")
+  head ENV.fetch("HOMEBREW_ARMIPS_HEAD_URL", "https://github.com/Kingcom/armips.git")
 
   depends_on "cmake" => :build
 
   def install
-    source_root = if ENV["HOMEBREW_OOTR_ARMIPS_SOURCE_DIR"].to_s.empty?
+    source_root = if ENV["HOMEBREW_ARMIPS_SOURCE_DIR"].to_s.empty?
       find_armips_source_root(buildpath)
     else
-      stage_local_source(ENV.fetch("HOMEBREW_OOTR_ARMIPS_SOURCE_DIR"))
+      stage_local_source(ENV.fetch("HOMEBREW_ARMIPS_SOURCE_DIR"))
     end
 
     cd source_root do
