@@ -14,8 +14,7 @@ brew install --HEAD ootrandomizer/tap/armips ootrandomizer/tap/n64
 `mips64-` compiler and binutils used by `OoT-Randomizer/ASM/build.py`.
 
 On Apple Silicon, the n64 formula uses GNU sed, propagates Homebrew prerequisite
-paths, disables GDB by default for compatibility, and uses one build job by
-default. Set `HOMEBREW_N64_BUILD_GDB=1` to enable GDB or
+paths, disables GDB for compatibility, and uses one build job by default. Set
 `HOMEBREW_N64_JOBS=<n>` to choose another job count.
 
 ## Optional local sources

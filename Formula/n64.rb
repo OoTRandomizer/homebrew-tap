@@ -41,13 +41,7 @@ class N64 < Formula
     end
 
     configure_args = ["--prefix=#{prefix}"]
-    gdb_override = ENV["HOMEBREW_N64_BUILD_GDB"]
-    odie "HOMEBREW_N64_BUILD_GDB must be 0 or 1" if gdb_override && !%w[0 1].include?(gdb_override)
-    if gdb_override == "0" || (gdb_override.nil? && OS.mac? && Hardware::CPU.arm?)
-      configure_args << "--disable-toolchain-gdb"
-    elsif gdb_override == "1"
-      configure_args << "--enable-toolchain-gdb"
-    end
+    configure_args << "--disable-toolchain-gdb" if OS.mac? && Hardware::CPU.arm?
 
     cd source_root do
       system "./configure", *configure_args
